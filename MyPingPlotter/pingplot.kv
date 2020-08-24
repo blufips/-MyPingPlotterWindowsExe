@@ -1,0 +1,91 @@
+#:import MeshLinePlot kivy_garden.graph.MeshLinePlot
+
+<SetGraph>:
+    TextInput:
+        id: host_input
+        font_size: self.height - self.height*0.5
+        size_hint: 0.5, 0.1
+        pos_hint: {'x':0.05, 'top':0.95}
+        multiline: False
+    Button:
+        id: start_button
+        text: 'Start'
+        size_hint: 0.15, 0.1
+        pos_hint: {'x':0.6, 'top':0.95}
+        on_release: root.click_start()
+    Button:
+        id: stop_button
+        text: 'Stop'
+        size_hint: 0.15, 0.1
+        pos_hint: {'x':0.8, 'top':0.95}
+        on_release: root.click_stop()
+    GridLayout:
+        cols: 1
+        size_hint: 0.5, 0.75
+        pos_hint: {'x':0.05, 'top':0.8}
+        # canvas.before:
+        #     Color:
+        #         rgba: 1, 0, 0, 1
+        #     Rectangle:
+        #         size: self.size
+        #         pos: self.pos
+        BoxLayout:
+            size_hint: 1, 0.1
+            orientation: 'horizontal'
+            Label:
+                text: 'Hop'
+                font_size: '14dp'
+                size_hint: 0.1, 1
+            Label:
+                text: 'PL%'
+                font_size: '14dp'
+                size_hint: 0.1, 1
+            Label:
+                text: 'IP'
+                font_size: '14dp'
+                size_hint: 0.3, 1
+            Label:
+                text: 'Name'
+                font_size: '14dp'
+                size_hint: 0.3, 1
+            Label:
+                text: 'Avg'
+                font_size: '14dp'
+                size_hint: 0.1, 1
+            Label:
+                text: 'Cur'
+                font_size: '14dp'
+                size_hint: 0.1, 1
+        GridLayout:
+            id: output_grid
+            cols: 6
+            size_hint: 1, 0.9
+            # canvas.before:
+            #     Color:
+            #         rgba: 0, 1, 0, 1
+            #     Rectangle:
+            #         size: self.size
+            #         pos: self.pos
+    Label:
+        id: max_latency
+        size_hint: 0.05, 0.03
+        pos_hint: {'x':0.9, 'top':0.78}
+        text: str(tracert_graph.xmax)+'ms' if tracert_graph.xmax == 0 else str(round(tracert_graph.xmax*1.1))+'ms'
+    Graph:
+        id: tracert_graph
+        size_hint: 0.4, 0.75
+        pos_hint: {'x':0.55, 'top':0.75}
+        plot: MeshLinePlot
+        xlabel:'Latency'
+        ylabel:'Hop'
+        x_ticks_minor:1
+        x_tics_major:50
+        y_ticks_major:1
+        y_grid_label:True
+        x_grid_label:True
+        padding:5
+        x_grid:True
+        y_grid:True
+        xmin:0
+        xmax:0
+        ymax:0

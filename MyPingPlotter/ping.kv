@@ -1,0 +1,75 @@
+#:import MeshLinePlot kivy_garden.graph.MeshLinePlot
+<Screen>:
+    Label:
+        id: hostname_label
+        size_hint: 0.15, 0.1
+        pos_hint: {'x':0.05, 'top':0.95}
+        text_size: self.width, None
+        halign: 'center'
+    Label:
+        id: desip_label
+        size_hint: 0.12, 0.1
+        pos_hint: {'x':0.22, 'top':0.95}
+    Label:
+        id: hop_label
+        size_hint: 0.1, 0.1
+        pos_hint: {'x':0.34, 'top':0.95}
+    Label:
+        id: ping_label
+        size_hint: 0.1, 0.1
+        pos_hint: {'x':0.44, 'top':0.95}
+    Label:
+        text: 'Graph time = '
+        size_hint: 0.125, 0.1
+        pos_hint: {'x':0.675, 'top':0.95}
+    FloatInput:
+        id: minutes_text
+        size_hint: 0.05, 0.05
+        pos_hint: {'x':0.80, 'top':0.925}
+        text: '60'
+        multiline: False
+    Label:
+        text: ' minutes'
+        size_hint: 0.05, 0.1
+        pos_hint: {'x':0.86, 'top':0.95}
+    Label:
+        id: latency_label
+        text: str(tracert_graph.ymax)+'ms'
+        size_hint: 0.1, 0.1
+        pos_hint: {'x':0.05, 'top':0.88}
+    Graph:
+        id: tracert_graph
+        size_hint: 0.8, 0.75
+        pos_hint: {'x':0.1, 'top':0.85}
+        plot: MeshLinePlot
+        # xlabel:'time'
+        ylabel:'ms'
+        x_ticks_minor:1
+        x_tics_major:50
+        y_ticks_major:1
+        y_grid_label:True
+        x_grid_label:True
+        padding:5
+        x_grid:True
+        y_grid:True
+        xmin:0
+        xmax: int(minutes_text.text)*60 if len(minutes_text.text) > 0 else 3600
+        ymin:0
+        ymax:0
+    BoxLayout:
+        size_hint: 0.88, 0.1
+        pos_hint: {'x':0.08, 'top':0.135}
+        Label:
+            id: time1_label
+        Label:
+            id: time2_label
+        Label:
+            id: time3_label
+        Label:
+            id: time4_label
+        Label:
+            id: time5_label
+        Label:
+            id: time6_label
+        Label:
+            id: time7_label
